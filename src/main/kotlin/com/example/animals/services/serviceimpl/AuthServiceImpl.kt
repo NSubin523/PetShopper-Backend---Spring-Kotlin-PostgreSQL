@@ -8,9 +8,9 @@ import com.example.animals.data.mapper.login.LoginMapper
 import com.example.animals.domain.model.UserModel
 import com.example.animals.events.login.event.UserLoginEvent
 import com.example.animals.exception.credentials.InvalidCredentialsException
-import com.example.animals.repository.LoginLogoutRepository
+import com.example.animals.repository.AuthActivityRepository
 import com.example.animals.repository.UserRepository
-import com.example.animals.services.service.LoginService
+import com.example.animals.services.service.AuthService
 import com.example.animals.util.Constants
 import com.example.animals.util.JwtUtil
 import org.springframework.context.ApplicationEventPublisher
@@ -18,13 +18,13 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class LoginServiceImpl(
+class AuthServiceImpl(
     private val userRepository: UserRepository,
     private val passwordEncoder: PasswordEncoder,
     private val jwtUtil: JwtUtil,
     private val eventPublisher: ApplicationEventPublisher,
-    private val activityRepo: LoginLogoutRepository
-): LoginService{
+    private val authRepo: AuthActivityRepository
+): AuthService{
     override fun login(request: LoginRequestDto): LoginResponseDto {
         try {
             val user : UserModel = userRepository.findByEmail(request.email)
@@ -42,14 +42,14 @@ class LoginServiceImpl(
         }
     }
 
-    override fun logLoginLogoutActivity(uuid: java.util.UUID?, action: String) {
+    override fun logAuthenticationActivity(uuid: java.util.UUID?, action: String) {
         try {
             val entity = LoginLogoutActivityMapper.toEntity(LoginLogoutActivityDto(
                 userUuid = uuid,
                 action = action
             ))
 
-            activityRepo.save(entity)
+            authRepo.save(entity)
         } catch (ex: Exception) {
             throw RuntimeException("Something went wrong - ", ex)
         }
