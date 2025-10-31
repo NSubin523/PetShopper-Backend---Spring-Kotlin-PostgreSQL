@@ -1,7 +1,5 @@
 package com.example.animals.events.login.listener
 
-import com.example.animals.data.dto.activity.LoginLogoutActivityDto
-import com.example.animals.data.mapper.activity.LoginLogoutActivityMapper
 import com.example.animals.events.login.event.UserLoginEvent
 import com.example.animals.services.service.LoginService
 import com.example.animals.util.Constants
