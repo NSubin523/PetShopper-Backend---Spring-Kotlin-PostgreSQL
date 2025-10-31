@@ -1,6 +1,6 @@
 package com.example.animals.repository
 
-import com.example.animals.domain.model.LoginLogoutActivity
+import com.example.animals.domain.model.AuthActivityModel
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface AuthActivityRepository : JpaRepository<LoginLogoutActivity, Long>
+interface AuthActivityRepository : JpaRepository<AuthActivityModel, Long>

@@ -1,9 +1,9 @@
 package com.example.animals.services.serviceimpl
 
-import com.example.animals.data.dto.activity.LoginLogoutActivityDto
+import com.example.animals.data.dto.activity.AuthActivityDto
 import com.example.animals.data.dto.login.LoginRequestDto
 import com.example.animals.data.dto.login.LoginResponseDto
-import com.example.animals.data.mapper.activity.LoginLogoutActivityMapper
+import com.example.animals.data.mapper.activity.AuthActivityMapper
 import com.example.animals.data.mapper.login.LoginMapper
 import com.example.animals.domain.model.UserModel
 import com.example.animals.events.login.event.UserLoginEvent
@@ -44,7 +44,7 @@ class AuthServiceImpl(
 
     override fun logAuthenticationActivity(uuid: java.util.UUID?, action: String) {
         try {
-            val entity = LoginLogoutActivityMapper.toEntity(LoginLogoutActivityDto(
+            val entity = AuthActivityMapper.toEntity(AuthActivityDto(
                 userUuid = uuid,
                 action = action
             ))

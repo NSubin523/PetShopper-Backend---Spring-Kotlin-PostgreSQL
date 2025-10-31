@@ -11,13 +11,13 @@ import java.util.UUID
 
 @Entity
 @Table(name = "user_activity_log")
-data class LoginLogoutActivity(
+data class AuthActivityModel(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column(name = "user_uuid", unique = true, nullable = false)
+    @Column(name = "user_uuid", nullable = false)
     val userUuid: UUID?,
 
     @Column(name = "event_type", nullable = false)
