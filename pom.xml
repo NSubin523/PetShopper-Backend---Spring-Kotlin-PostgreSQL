@@ -146,6 +146,16 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>11.7.2</version>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/petshopper_db</url>
+                    <user>postgres</user>
+                    <password>example</password>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
