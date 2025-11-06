@@ -1,6 +1,5 @@
 package com.example.animals.controllers
 
-import com.example.animals.domain.model.UserModel
 import com.example.animals.data.dto.user.CreateUserRequestDto
 import com.example.animals.data.mapper.user.UserMapper
 import com.example.animals.services.service.UserService
@@ -21,12 +20,12 @@ class UserController (
 ){
 
     @PostMapping
-    fun createNewUser(@Valid @RequestBody request: CreateUserRequestDto): ResponseEntity<UserModel> {
-
-        val newUser : UserModel = userService.createUser(
-            UserMapper.toEntity(request)
-        )
-        return ResponseEntity.status(HttpStatus.CREATED).body(newUser)
+    fun createNewUser(@Valid @RequestBody request: CreateUserRequestDto): ResponseEntity<Any> {
+        val status = userService.createUser(UserMapper.toEntity(request))
+        return ResponseEntity.status(
+            if (status == HttpStatus.CREATED.value()) HttpStatus.CREATED
+            else HttpStatus.INTERNAL_SERVER_ERROR
+        ).build()
     }
 
 }
