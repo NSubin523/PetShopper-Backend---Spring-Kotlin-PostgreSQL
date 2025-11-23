@@ -2,6 +2,7 @@ package com.example.animals.exception
 
 import com.example.animals.exception.credentials.InvalidCredentialsException
 import com.example.animals.exception.duplicate.DuplicateResourceException
+import com.example.animals.exception.invalid.CategoryNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -64,6 +65,16 @@ class GlobalExceptionHandler {
                     "message" to ex.message
                 )
             )
+    }
+
+    @ExceptionHandler(CategoryNotFoundException::class)
+    fun handleCategoryUuidNotFound(ex: CategoryNotFoundException): ResponseEntity<Map<String, Any>> {
+        val body = mapOf(
+            "error" to "Not Found",
+            "message" to ex.message,
+            "status" to HttpStatus.NOT_FOUND.value()
+        )
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body)
     }
 
 }
