@@ -13,7 +13,7 @@ import java.util.UUID
 @Service
 class InventoryServiceImpl(
     private val inventoryRepository: InventoryRepository,
-    private val categoryRepository: CategoryRepository,
+    private val categoryRepository: CategoryRepository
 ): InventoryService {
     override fun getInventoryByCategoryUuid(
         categoryUuid: UUID,

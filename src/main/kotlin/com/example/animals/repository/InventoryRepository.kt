@@ -8,4 +8,6 @@ import java.util.UUID
 
 interface InventoryRepository: JpaRepository<Inventory, UUID> {
     fun findByCategoryId(categoryId: UUID, pageable: Pageable): Page<Inventory>
+
+    fun findAllByUuidIn(uuids: List<UUID>, pageable: Pageable): Page<Inventory>
 }
